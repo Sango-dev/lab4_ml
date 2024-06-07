@@ -1,0 +1,61 @@
+# Data configuration
+data:
+  local_dir: /content/lab4_ml/data/petOxford
+
+pass:
+  USERNAME: Sango-dev
+  PROJECTNAME: my-first-repo
+
+dataset:
+  train_split: 0.75
+  val_split: 0.25
+  random_seed: 42
+  input_shape: [225, 225, 3]
+  num_classes: 37
+
+# Training configuration
+training:
+  epochs: 5
+  batch_size: 32
+  optimizer:
+    name: AdamW
+    lr: 0.0001
+  loss: CrossEntropyLoss
+  metrics:
+    - accuracy
+    - f1_score
+    - precision
+    - recall
+
+# Model configuration
+model:
+  name: resnet50
+  pretrained: True
+  num_classes: 37
+  freeze_base: False
+
+# Logging configuration
+logging:
+  level: INFO
+  file: /content/lab4_ml/logs/training.log
+  format: '%(asctime)s - %(levelname)s - %(message)s'
+
+# Artifacts configuration
+artifacts:
+  output_dir: /content/lab4_ml/artifacts
+  model_file: /content/lab4_ml/artifacts/model.pth
+  best_model_file: /content/lab4_ml/artifacts/best_model.pth
+  save_best_model: True
+  save_logs: True
+  save_metrics: True
+  save_confusion_matrix: True
+
+
+# Evaluation configuration
+evaluation:
+  metrics:
+    - accuracy
+    - f1_score
+    - precision
+    - recall
+  compute_confusion_matrix: True
